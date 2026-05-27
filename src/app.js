@@ -8,4 +8,4 @@ let app = express()
 
 
 
-module.exports = app()
+module.exports = app
