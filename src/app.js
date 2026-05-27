@@ -115,6 +115,34 @@ app.patch("/note/update/:id", async (req, res) => {
 })
 
 
+/**
+ *@route DELETE/note/delete
+ *@description update a note by id require description  in the request body
+ *@access Public
+ */
+
+app.patch("/note/delete/:id", async (req, res) => {
+    try {
+
+        let { id } = req.params;
+
+
+        let note = await noteModel.findByIdAndDelete(id)
+
+        return res.status(200).json({
+            message: "note Deleted successfully",
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "internal server error",
+            err: error.message
+        })
+    }
+})
+
+
+
 
 
 module.exports = app
