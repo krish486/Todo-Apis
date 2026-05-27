@@ -4,9 +4,12 @@ const noteModel = require("./models/note.model");
 
 let app = express()
 
+//----to accept the data from the user
+app.use(express.json())
+
 
 /**
- *@route POST/api/notes
+ *@route POST/note/create
  *@description create a new note need title and description in the request body
  *@access Public
  */
@@ -46,6 +49,32 @@ app.post("/note/create", async (req, res) => {
     }
 })
 
+
+
+/**
+ *@route GET/note/read
+ *@description get app notes
+ *@access Public
+ */
+
+app.get("/note/read", async (req, res) => {
+    try {
+
+        let notes = await noteModel.find()
+
+        return res.status(200).json({
+            message: "all data fetched successfully",
+            notes
+        })
+
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "internal server error",
+            err: error.message
+        })
+    }
+})
 
 
 
